@@ -290,7 +290,7 @@
     </div>
 
     <div class="badge">🐎 Цагаан сарын мэнд хүргэе</div>
-    <h1>🌕 Нэг удаа дарж эхлүүлээрэй</h1>
+    <h1 id="startTitle">🌕 Нэг удаа дарж эхлүүлээрэй</h1>
 
     <div class="sub">
       iPhone/iPad дээр дуу <b>эхний товшилтын</b> дараа л асдаг. <br>
@@ -358,12 +358,17 @@
   const petalsLayer = document.getElementById("petals");
   const confettiLayer = document.getElementById("confetti");
 
+  const startTitle = document.getElementById("startTitle");
   const titleText = document.getElementById("titleText");
   const greetingText = document.getElementById("greetingText");
 
   // ===== Personalize by ?name=
   function qp(k){ return new URLSearchParams(location.search).get(k); }
   const personName = ((qp("name")||"").trim() || "Найз минь");
+
+  // Start screen дээр ч нэр гаргая
+  startTitle.textContent = `🌕 Сар шинийн мэнд, ${personName}!`;
+  // Greet screen дээр
   titleText.textContent = `Цагаан сарын мэнд, ${personName}! 🌕`;
 
   // ===== Random blessings (ерөөл) =====
@@ -450,6 +455,7 @@
     t.addEventListener("click", toggleMusic);
   });
 
+  // iOS: user gesture дээр л асах боломжтой
   window.addEventListener("pointerdown", startMusicSoft, { once:false });
   window.addEventListener("touchstart", startMusicSoft, { passive:true });
 
@@ -523,7 +529,6 @@
 
   // initial
   setToggleUI(true);
-  renderBlessing(); // (preview дээр шууд харагдана)
 </script>
 
 </body>
